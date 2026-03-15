@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physique Lab | Secure Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+
+    <div class="auth-wrapper text-center">
+        <h1 class="brand-title">PHYSIQUE<span>LAB</span></h1>
+        <p class="brand-subtitle">ZERO-BACKEND PERFORMANCE TRACKER</p>
+        
+        <div class="card">
+            <h2 id="auth-title">UNLOCK VAULT</h2>
+            
+            <form id="auth-form">
+                <div class="input-group">
+                    <label for="nickname">(NICKNAME)</label>
+                    <input type="text" id="nickname" placeholder="e.g., Athlete99" required autocomplete="off">
+                </div>
+                
+                <div class="input-group">
+                    <label for="master-password">MASTER PASSWORD</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="master-password" placeholder="Enter password" required>
+                        <button type="button" id="toggle-password-btn" class="eye-btn">
+                            <svg id="eye-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" id="auth-btn" class="btn">UNLOCK</button>
+            </form>
+
+            <p id="auth-error" class="error-msg"></p>
+            
+            <a href="#" id="toggle-mode-btn" class="toggle-link">NEW ATHLETE? CREATE A VAULT HERE.</a>
+        </div>
+        
+        <footer class="site-footer login-footer">
+            COPYRIGHT &copy; 2026 <span>RUDADEV</span>. ALL RIGHTS RESERVED.
+        </footer>
+    </div>
+
+    <script src="js/crypto.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

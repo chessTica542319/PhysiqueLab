@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physique Lab | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="favicon.png">    
+</head>
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="brand-title" style="font-size: 1.8rem;">PHYSIQUE<span>LAB</span></h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="section-profile">PROFILE STATS</button>
+                <button class="nav-item" data-target="section-health">HEALTH RELATED</button>
+                <button class="nav-item" data-target="section-skill">SKILL RELATED</button>
+                <button class="nav-item" data-target="section-security">SECURITY</button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn logout-btn">LOGOUT</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="mobile-nav">
+                <button id="mobile-menu-btn" class="hamburger-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h2 class="brand-title" style="font-size: 1.4rem; margin: 0; letter-spacing: 1px;">PHYSIQUE<span>LAB</span></h2>
+            </div>
+            
+            <div id="sidebar-overlay" class="sidebar-overlay"></div>
+            
+            <header class="dashboard-header">
+                <h1 id="welcome-msg">LOADING ATHLETE...</h1>
+                <p class="brand-subtitle" style="margin-bottom: 0;">YOUR PERSONAL VAULT IS SECURE.</p>
+            </header>
+
+            <section id="section-profile" class="content-section active">
+                <div class="card">
+                    <h2>BODY COMPOSITION</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 25px;">Log your stats to automatically calculate and track your Body Mass Index (BMI).</p>
+                    
+                    <form id="bmi-form">
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <div class="input-group" style="flex: 1; min-width: 100px;">
+                                <label for="age-input">AGE (YRS)</label>
+                                <input type="number" id="age-input" placeholder="e.g. 25" required min="1">
+                            </div>
+                            <div class="input-group" style="flex: 1; min-width: 100px;">
+                                <label for="height-input">HEIGHT (CM)</label>
+                                <input type="number" id="height-input" placeholder="e.g. 175" required min="1">
+                            </div>
+                            <div class="input-group" style="flex: 1; min-width: 100px;">
+                                <label for="weight-input">WEIGHT (KG)</label>
+                                <input type="number" id="weight-input" placeholder="e.g. 70" required min="1">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">LOG & CALCULATE BMI</button>
+                    </form>
+                </div>
+                
+                <div class="card" style="margin-top: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                        <h2 style="margin: 0;">BMI HISTORY</h2>
+                        <button id="delete-selected-btn" class="btn" style="background: #ff4444; padding: 10px 15px; font-size: 0.8rem; width: auto; min-height: auto;">DELETE SELECTED</button>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40px;"><input type="checkbox" id="select-all-cb"></th>
+                                    <th>DATE</th>
+                                    <th>AGE</th>
+                                    <th>HEIGHT</th>
+                                    <th>WEIGHT</th>
+                                    <th>BMI</th>
+                                    <th>CATEGORY</th> 
+                                </tr>
+                            </thead>
+                            <tbody id="bmi-history-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-health" class="content-section">
+                <div class="card" style="margin-bottom: 30px;">
+                    <h2>HEALTH-RELATED FITNESS</h2>
+                    <p style="color: var(--text-muted);">Log Cardiovascular Endurance, Muscular Strength, and Flexibility.</p>
+                </div>
+                
+                <div class="card dashboard-card">
+                    <div class="card-header">
+                        <h2>Cardiovascular Endurance</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> <br>Step 1) Record resting pulse for 60s. <br>Step 2) Step up and down on a 12 inches box for 3 mins. <br>Step 3) Sit and immediately record pulse for 60s again.
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="cardio-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Resting HR (bpm)</label>
+                                <input type="number" id="resting-hr-input" placeholder="e.g., 72" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Post-Exercise HR (bpm)</label>
+                                <input type="number" id="post-hr-input" placeholder="e.g., 105" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG TEST</button>
+                            </div>
+                        </form>
+                        
+                        <div id="cardio-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Heart Rate Trends</h3>
+                                <button id="toggle-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            
+                            <div id="canvas-container" style="display: none; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="cardio-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Step Test History</h3>
+                                <button id="delete-cardio-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-cardio"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">RESTING HR</th>
+                                            <th style="padding: 10px;">POST-TEST HR</th>
+                                            <th style="padding: 10px;">FITNESS LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cardio-history-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Muscular Strength (Push-up Test)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Perform as many standard push-ups as you can continuously without breaking form.
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="strength-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Max Push-ups (Reps)</label>
+                                <input type="number" id="pushups-input" placeholder="e.g., 25" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG STRENGTH</button>
+                            </div>
+                        </form>
+                        
+                        <div id="strength-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Strength Trends</h3>
+                                <button id="toggle-strength-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="strength-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="strength-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Push-up History</h3>
+                                <button id="delete-strength-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-strength"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">REPS</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="strength-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Muscular Endurance (Plank Test)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Hold a proper forearm plank for as long as possible. Record the time in seconds.
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="endurance-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Plank Hold (Seconds)</label>
+                                <input type="number" id="plank-input" placeholder="e.g., 60" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG ENDURANCE</button>
+                            </div>
+                        </form>
+                        
+                        <div id="endurance-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Endurance Trends</h3>
+                                <button id="toggle-endurance-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="endurance-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="endurance-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Plank History</h3>
+                                <button id="delete-endurance-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-endurance"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">TIME (SEC)</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="endurance-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Flexibility (Sit and Reach)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Sit on the floor with legs straight. Reach forward as far as possible towards your toes. Record the distance in centimeters (cm). <em>(Standard box: 26cm is the toe line).</em>
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="flexibility-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Reach Distance (cm)</label>
+                                <input type="number" id="flexibility-input" placeholder="e.g., 30" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG FLEXIBILITY</button>
+                            </div>
+                        </form>
+                        
+                        <div id="flexibility-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Flexibility Trends</h3>
+                                <button id="toggle-flexibility-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="flexibility-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="flexibility-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Sit & Reach History</h3>
+                                <button id="delete-flexibility-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-flexibility"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">DISTANCE</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="flexibility-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-skill" class="content-section">
+                <div class="card">
+                    <h2>SKILL-RELATED FITNESS</h2>
+                    <p style="color: var(--text-muted);">Log Agility, Power, Speed, and Balance metrics.</p>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Power (Standing Long Jump)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Stand behind a line and jump forward as far as possible using both feet. Measure the distance from the start line to where your heels land in centimeters (cm).
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="power-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Jump Distance (cm)</label>
+                                <input type="number" id="power-input" placeholder="e.g., 200" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG POWER</button>
+                            </div>
+                        </form>
+                        
+                        <div id="power-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Power Trends</h3>
+                                <button id="toggle-power-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="power-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="power-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Jump History</h3>
+                                <button id="delete-power-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-power"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">DISTANCE</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="power-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Speed (50-Meter Sprint)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Sprint 50 meters as fast as you can from a standing start. Record your time in seconds (e.g., 6.8).
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="speed-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Sprint Time (Seconds)</label>
+                                <input type="number" id="speed-input" step="0.1" placeholder="e.g., 7.2" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG SPEED</button>
+                            </div>
+                        </form>
+                        
+                        <div id="speed-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Speed Trends</h3>
+                                <button id="toggle-speed-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="speed-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="speed-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Sprint History</h3>
+                                <button id="delete-speed-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-speed"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">TIME</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="speed-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Balance (Stork Stand Test)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Stand on one leg, place the other foot against the inside of the supporting knee, hands on hips. Raise the heel of the standing foot and balance on the ball of the foot. Record time in seconds.
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="balance-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Balance Time (Seconds)</label>
+                                <input type="number" id="balance-input" placeholder="e.g., 45" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG BALANCE</button>
+                            </div>
+                        </form>
+                        
+                        <div id="balance-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Balance Trends</h3>
+                                <button id="toggle-balance-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="balance-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="balance-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Stork Stand History</h3>
+                                <button id="delete-balance-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-balance"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">TIME</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="balance-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Agility (Illinois Agility Test)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Start lying face down. On the "go" command, jump up and run the standard 10m x 5m cone course (sprinting and weaving). Record your completion time in seconds.
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="agility-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Agility Time (Seconds)</label>
+                                <input type="number" id="agility-input" step="0.1" placeholder="e.g., 16.5" required min="1" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG AGILITY</button>
+                            </div>
+                        </form>
+                        
+                        <div id="agility-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Agility Trends</h3>
+                                <button id="toggle-agility-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="agility-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="agility-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Agility History</h3>
+                                <button id="delete-agility-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-agility"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">TIME</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="agility-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Coordination (Wall Toss Test)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> Stand 2 meters from a wall. Throw a tennis ball with one hand and catch it with the opposite hand. Repeat, alternating hands. Count the number of successful catches in 30 seconds.
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="coordination-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Successful Catches</label>
+                                <input type="number" id="coordination-input" placeholder="e.g., 25" required min="0" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG COORDINATION</button>
+                            </div>
+                        </form>
+                        
+                        <div id="coordination-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Coordination Trends</h3>
+                                <button id="toggle-coordination-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="coordination-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="coordination-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Wall Toss History</h3>
+                                <button id="delete-coordination-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-coordination"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">CATCHES</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="coordination-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h2>Reaction Time (Ruler Drop)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                            <strong>Protocol:</strong> A partner holds a ruler vertically between your open thumb and index finger (starting at 0mm). They drop it without warning. Catch it as fast as you can. Record the distance it fell in millimeters (mm). <em>Enter 0 if you completely missed it!</em>
+                        </p>
+                    </div>
+                    <br> 
+                    <div class="card-body">
+                        <form id="reaction-form" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.85rem; color: var(--text-muted);">Drop Distance (mm)</label>
+                                <input type="number" id="reaction-input" placeholder="e.g., 120 (Enter 0 if missed)" required min="0" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-color); color: var(--text);">
+                            </div>
+                            <div style="display: flex; align-items: flex-end;">
+                                <button type="submit" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer;">LOG REACTION</button>
+                            </div>
+                        </form>
+                        
+                        <div id="reaction-chart-wrapper" style="display: none; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Reaction Trends</h3>
+                                <button id="toggle-reaction-chart-btn" class="btn" style="padding: 5px 15px; font-size: 0.8rem; width: auto; min-height: auto;">SHOW CHART</button>
+                            </div>
+                            <div id="reaction-canvas-container" style="display: none; position: relative; width: 100%; height: 35vh; min-height: 250px; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <canvas id="reaction-chart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h3 style="font-size: 1rem;">Ruler Drop History</h3>
+                                <button id="delete-reaction-btn" style="padding: 5px 10px; background: transparent; color: #ff4444; border: 1px solid #ff4444; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Delete Selected</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead style="border-bottom: 2px solid var(--border);">
+                                        <tr>
+                                            <th style="padding: 10px; width: 40px;"><input type="checkbox" id="select-all-reaction"></th>
+                                            <th style="padding: 10px;">DATE</th>
+                                            <th style="padding: 10px;">DISTANCE</th>
+                                            <th style="padding: 10px;">LEVEL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reaction-history-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="section-security" class="content-section">
+                <div class="card">
+                    <h2>CHANGE MASTER PASSWORD</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 25px;">Keep your vault locked down. Enter your current password to authorize changes.</p>
+                    
+                    <form id="change-pwd-form">
+                        <div class="input-group">
+                            <label for="current-pwd">CURRENT PASSWORD</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="current-pwd" placeholder="Enter current password" required>
+                                <button type="button" class="eye-btn toggle-password-btn">
+                                    <svg class="eye-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="new-pwd">NEW PASSWORD</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="new-pwd" placeholder="Enter new password" required>
+                                <button type="button" class="eye-btn toggle-password-btn">
+                                    <svg class="eye-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="confirm-pwd">CONFIRM NEW PASSWORD</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="confirm-pwd" placeholder="Re-type new password" required>
+                                <button type="button" class="eye-btn toggle-password-btn">
+                                    <svg class="eye-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" id="change-pwd-btn" class="btn">UPDATE PASSWORD</button>
+                    </form>
+                    
+                    <p id="pwd-msg" class="error-msg"></p>
+                </div>
+            </section>
+
+            <footer class="site-footer dashboard-footer">
+                COPYRIGHT &copy; 2026 <span>RUDADEV</span>. ALL RIGHTS RESERVED.
+            </footer>
+
+        </main> 
+    </div>
+        
+    <aside id="bmi-info-drawer" class="slide-drawer">
+        <div class="drawer-header">
+            <h3 id="drawer-title">Insights</h3>
+            <button type="button" id="close-drawer-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="drawer-body">
+            <p id="drawer-content">Your advice will appear here.</p>
+        </div>
+    </aside>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="js/crypto.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/bmi.js"></script>
+    <script src="js/cardio.js"></script>
+    <script src="js/mascular.js"></script>
+    <script src="js/flexibility.js"></script>
+    <script src="js/power.js"></script>
+    <script src="js/speed.js"></script>
+    <script src="js/balance.js"></script>
+    <script src="js/agility.js"></script>
+    <script src="js/coordination.js"></script>
+    <script src="js/reaction.js"></script>
+</body>
+</html>
