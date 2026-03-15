@@ -56,11 +56,11 @@ This application tracks both health-related and skill-related fitness components
 ## Technology Stack
 
 * **Frontend Structure:** HTML5
-* **Styling:** CSS3 (Custom Variables, Flexbox, Grid)
-* **Logic & Functionality:** Vanilla JavaScript (ES6+)
+* **Styling & Responsive Design:** CSS3 (Custom Variables, Flexbox, Grid)
+* **Application Logic & DOM Manipulation:** Vanilla JavaScript (ES6+)
 * **Data Visualization:** Chart.js
-* **Storage Environment:** Window.localStorage API
-* **Security:** Native Web Crypto API
+* **Data Storage:** `localStorage` API (Device-specific local storage)
+* **Security:** Web Crypto API (`SubtleCrypto.digest` method for SHA-256 password hashing, resulting in 64-character hex strings)
 
 ---
 
